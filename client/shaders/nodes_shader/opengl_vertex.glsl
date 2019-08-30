@@ -76,9 +76,13 @@ float disp_z;
 
 #if (MATERIAL_TYPE == TILE_MATERIAL_WAVING_LIQUID_TRANSPARENT || MATERIAL_TYPE == TILE_MATERIAL_WAVING_LIQUID_OPAQUE || MATERIAL_TYPE == TILE_MATERIAL_WAVING_LIQUID_BASIC) && ENABLE_WAVING_WATER
 	vec4 pos = gl_Vertex;
-	pos.y -= 2.0;
+	//pos.y -= 2.0;
 	float posYbuf = (pos.z / WATER_WAVE_LENGTH + animationTimer * WATER_WAVE_SPEED * WATER_WAVE_LENGTH);
-	pos.y -= sin(posYbuf) * WATER_WAVE_HEIGHT + sin(posYbuf / 7.0) * WATER_WAVE_HEIGHT;
+	//Fixed liquid waving shader per: https://github.com/minetest/minetest/issues/8369
+	float min_waviness = 1.111111;
+	float amplitude_factor = (mod(pos.y + 4.998, 10.0) + min_waviness) / (10.0 + min_waviness);
+	pos.y -= (2.0 + (sin(posYbuf) + sin(posYbuf / 7.0)) * WATER_WAVE_HEIGHT) * amplitude_factor;
+	//pos.y -= sin(posYbuf) * WATER_WAVE_HEIGHT + sin(posYbuf / 7.0) * WATER_WAVE_HEIGHT;
 	gl_Position = mWorldViewProj * pos;
 #elif MATERIAL_TYPE == TILE_MATERIAL_WAVING_LEAVES && ENABLE_WAVING_LEAVES
 	vec4 pos = gl_Vertex;

@@ -3455,7 +3455,8 @@ bool GUIFormSpecMenu::OnEvent(const SEvent& event)
 					leftover.name == stack_from.name) {
 
 				if (m_selected_swap.empty()) {
-					m_selected_amount = stack_to.count;
+					//Fix itemstack swapping bug.
+					//m_selected_amount = stack_to.count;
 					m_selected_dragging = false;
 
 					// WARNING: BLACK MAGIC, BUT IN A REDUCED SET
