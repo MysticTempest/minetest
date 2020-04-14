@@ -610,11 +610,10 @@ int ModApiItemMod::l_get_content_id(lua_State *L)
 	std::string name = luaL_checkstring(L, 1);
 
 	const NodeDefManager *ndef = getGameDef(L)->getNodeDefManager();
-	content_t content_id;
-	if (!ndef->getId(name, content_id))
-		//throw LuaError("Unknown node: " + name);
+	//Undo https://github.com/minetest/minetest/pull/9458
+	content_t c = ndef->getId(name);
 
-	lua_pushinteger(L, content_id);
+	lua_pushinteger(L, c);
 	return 1; /* number of results */
 }
 
