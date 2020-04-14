@@ -612,7 +612,7 @@ int ModApiItemMod::l_get_content_id(lua_State *L)
 	const NodeDefManager *ndef = getGameDef(L)->getNodeDefManager();
 	content_t content_id;
 	if (!ndef->getId(name, content_id))
-		throw LuaError("Unknown node: " + name);
+		//throw LuaError("Unknown node: " + name);
 
 	lua_pushinteger(L, content_id);
 	return 1; /* number of results */
@@ -639,3 +639,4 @@ void ModApiItemMod::Initialize(lua_State *L, int top)
 	API_FCT(get_content_id);
 	API_FCT(get_name_from_content_id);
 }
+

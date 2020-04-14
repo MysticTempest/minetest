@@ -126,7 +126,7 @@ float disp_z;
 	wavePos.x /= WATER_WAVE_LENGTH * 3;
 	wavePos.z /= WATER_WAVE_LENGTH * 2;
 	wavePos.z += animationTimer * WATER_WAVE_SPEED * 10;
-	pos.y += (snoise(wavePos) - 1) * WATER_WAVE_HEIGHT * 5;
+	pos.y += (snoise(wavePos) - 4) * WATER_WAVE_HEIGHT * 5;
 	gl_Position = mWorldViewProj * pos;
 #elif MATERIAL_TYPE == TILE_MATERIAL_WAVING_LEAVES && ENABLE_WAVING_LEAVES
 	vec4 pos = gl_Vertex;
