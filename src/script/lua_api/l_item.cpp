@@ -623,20 +623,10 @@ int ModApiItemMod::l_get_content_id(lua_State *L)
 	const IItemDefManager *idef = getGameDef(L)->getItemDefManager();
 	const NodeDefManager *ndef = getGameDef(L)->getNodeDefManager();
 
-	// If this is called at mod load time, NodeDefManager isn't aware of
-	// aliases yet, so we need to handle them manually
-	std::string alias_name = idef->getAlias(name);
+	//Undo https://github.com/minetest/minetest/pull/9458
+	content_t c = ndef->getId(name);
 
-	content_t content_id;
-	if (alias_name != name) {
-		if (!ndef->getId(alias_name, content_id))
-			throw LuaError("Unknown node: " + alias_name +
-					" (from alias " + name + ")");
-	} else if (!ndef->getId(name, content_id)) {
-		throw LuaError("Unknown node: " + name);
-	}
-
-	lua_pushinteger(L, content_id);
+ 	lua_pushinteger(L, c);
 	return 1; /* number of results */
 }
 

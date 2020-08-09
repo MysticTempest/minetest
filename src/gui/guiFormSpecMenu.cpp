@@ -4265,7 +4265,8 @@ bool GUIFormSpecMenu::OnEvent(const SEvent& event)
 
 					// WARNING: BLACK MAGIC, BUT IN A REDUCED SET
 					// Skip next validation checks due async inventory calls
-					m_selected_swap = stack_to;
+					//hacky itemstack swappping fix					
+					//m_selected_swap = stack_to;
 				} else {
 					move = false;
 				}
