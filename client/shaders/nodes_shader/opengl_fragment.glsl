@@ -189,6 +189,14 @@ void main(void)
 	}
 #endif
 	vec4 base = texture2D(baseTexture, uv).rgba;
+	//HybridDog's mipmapping fix.
+	if (base.a == 0.0)
+		// Invisible fragments can be skipped
+		discard;
+	if (base.a < 1.0) {
+		// for testing with mipmapping
+		base = texture2D(baseTexture, uv, -5.0).rgba;
+	}
 
 #ifdef ENABLE_BUMPMAPPING
 	if (use_normalmap) {

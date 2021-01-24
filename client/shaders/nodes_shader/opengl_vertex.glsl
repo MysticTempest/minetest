@@ -24,7 +24,7 @@ varying vec3 tsLightVec;
 varying float area_enable_parallax;
 
 // Color of the light emitted by the light sources.
-const vec3 artificialLight = vec3(1.04, 1.04, 1.04);
+const vec3 artificialLight = vec3(.85, .81, .80);
 const float e = 2.718281828459;
 const float BS = 10.0;
 
@@ -184,7 +184,7 @@ float disp_z;
 	// The alpha gives the ratio of sunlight in the incoming light.
 	float nightRatio = 1 - gl_Color.a;
 	color.rgb = gl_Color.rgb * (gl_Color.a * dayLight.rgb + 
-		nightRatio * artificialLight.rgb) * 2;
+		nightRatio * artificialLight.rgb) * 1.8;
 	color.a = 1;
 
 	// Emphase blue a bit in darker places
